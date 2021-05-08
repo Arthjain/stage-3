@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Flight.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Flight-Management</a> &gt; <a href="index.source.html" class="el_package">com.cognizant.model</a> &gt; <span class="el_source">Flight.java</span></div><h1>Flight.java</h1><pre class="source lang-java linenums">package com.cognizant.model;
+
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.cognizant.exception.InvalidFlightOperationException;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
+
+<span class="fc" id="L13">@Slf4j</span>
+@Getter
+<span class="pc" id="L15">@Setter</span>
+<span class="fc" id="L16">public class Flight {</span>
+<span class="nc" id="L17">	private String id;</span>
+<span class="fc" id="L18">	private String flightType;</span>
+<span class="pc" id="L19">	private List&lt;Passenger&gt; passengers=new ArrayList&lt;&gt;();</span>
+	private static final String MESSAGE=&quot;Cannot Add Passenger due to Invalid Constraints&quot;;
+	
+	public boolean addPassenger(Passenger passenger) throws InvalidFlightOperationException {
+<span class="fc" id="L23">		log.info(&quot;Start&quot;);</span>
+<span class="fc bfc" id="L24" title="All 2 branches covered.">		if(flightType.equalsIgnoreCase(&quot;economy&quot;)) {</span>
+<span class="fc" id="L25">			passengers.add(passenger);</span>
+<span class="fc" id="L26">			log.info(&quot;End&quot;);</span>
+<span class="fc" id="L27">			return true;</span>
+		}
+		else {
+<span class="fc bfc" id="L30" title="All 2 branches covered.">			if(passenger.isVip()) {</span>
+<span class="fc" id="L31">				passengers.add(passenger);</span>
+<span class="fc" id="L32">				log.info(&quot;End&quot;);</span>
+<span class="fc" id="L33">				return true;</span>
+			}
+			else {
+<span class="fc" id="L36">				log.error(MESSAGE);</span>
+<span class="fc" id="L37">				throw new InvalidFlightOperationException(MESSAGE);</span>
+			}
+		}
+	}
+	
+	public boolean removePassenger(Passenger passenger) throws InvalidFlightOperationException {
+<span class="fc" id="L43">		log.info(&quot;Start&quot;);</span>
+<span class="fc bfc" id="L44" title="All 2 branches covered.">		if(passenger.isVip()) {</span>
+<span class="fc" id="L45">			log.error(MESSAGE);</span>
+<span class="fc" id="L46">			throw new InvalidFlightOperationException(MESSAGE);</span>
+		}
+		else {
+<span class="fc" id="L49">			passengers.remove(passenger);</span>
+<span class="fc" id="L50">			log.info(&quot;End&quot;);</span>
+<span class="fc" id="L51">			return true;</span>
+		}
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

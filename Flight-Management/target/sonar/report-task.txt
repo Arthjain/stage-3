@@ -1,0 +1,6 @@
+projectKey=flight
+serverUrl=http://localhost:9000
+serverVersion=8.8.0.42792
+dashboardUrl=http://localhost:9000/dashboard?id=flight
+ceTaskId=AXk2oxDnVBTMjQ0iM1Lb
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AXk2oxDnVBTMjQ0iM1Lb
