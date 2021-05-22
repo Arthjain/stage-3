@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Departments -->
+	<bean id="fse" class="com.cognizant.springlearn.model.Department">
+		<property name="id" value="1" />
+		<property name="name" value="FSE" />
+	</bean>
+
+	<bean id="hr" class="com.cognizant.springlearn.model.Department">
+		<property name="id" value="2" />
+		<property name="name" value="HR" />
+	</bean>
+
+	<bean id="payroll"
+		class="com.cognizant.springlearn.model.Department">
+		<property name="id" value="3" />
+		<property name="name" value="Payroll" />
+	</bean>
+
+	<bean id="cis" class="com.cognizant.springlearn.model.Department">
+		<property name="id" value="4" />
+		<property name="name" value="CIS" />
+	</bean>
+	
+	<!--  Department List  -->
+	<bean id="departmentList" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<ref bean="fse"></ref>
+				<ref bean="hr"></ref>
+				<ref bean="payroll"></ref>
+				<ref bean="cis"></ref>
+			</list>
+		</constructor-arg>
+	</bean>
+
+
+	<!-- Skills -->
+	<bean id="s1" class="com.cognizant.springlearn.model.Skill">
+		<property name="id" value="1" />
+		<property name="name" value="Java" />
+	</bean>
+
+	<bean id="s2" class="com.cognizant.springlearn.model.Skill">
+		<property name="id" value="2" />
+		<property name="name" value="HTML" />
+	</bean>
+
+	<bean id="s3" class="com.cognizant.springlearn.model.Skill">
+		<property name="id" value="3" />
+		<property name="name" value="MySQL" />
+	</bean>
+
+	<bean id="s4" class="com.cognizant.springlearn.model.Skill">
+		<property name="id" value="5" />
+		<property name="name" value="Python" />
+	</bean>
+
+	<bean id="s5" class="com.cognizant.springlearn.model.Skill">
+		<property name="id" value="5" />
+		<property name="name" value="AWS" />
+	</bean>
+
+
+	<!-- Employees -->
+	<bean id="101" class="com.cognizant.springlearn.model.Employee">
+		<property name="id" value="101" />
+		<property name="name" value="Pavi" />
+		<property name="salary" value="100" />
+		<property name="permanent" value="true" />
+
+		<property name="department" ref="fse" />
+
+		<property name="skills">
+			<list>
+				<ref bean="s1" />
+				<ref bean="s2" />
+			</list>
+		</property>
+
+		<property name="dateOfBirth" value="03/09/1999" />
+	</bean>
+
+	<bean id="102" class="com.cognizant.springlearn.model.Employee">
+		<property name="id" value="102" />
+		<property name="name" value="Thara" />
+		<property name="salary" value="1000" />
+		<property name="permanent" value="false" />
+		
+		<property name="department" ref="cis" />
+
+		<property name="skills">
+			<list>
+				<ref bean="s4" />
+				<ref bean="s5" />
+			</list>
+		</property>
+
+		<property name="dateOfBirth" value="12/03/2004" />
+	</bean>
+
+	<bean id="103" class="com.cognizant.springlearn.model.Employee">
+		<property name="id" value="103" />
+		<property name="name" value="Yashi" />
+		<property name="salary" value="500" />
+		<property name="permanent" value="true" />
+		
+		<property name="department" ref="hr" />
+
+		<property name="skills">
+			<list>
+				<ref bean="s2" />
+				<ref bean="s3" />
+			</list>
+		</property>
+
+		<property name="dateOfBirth" value="22/06/1994" />
+	</bean>
+
+	<bean id="104" class="com.cognizant.springlearn.model.Employee">
+		<property name="id" value="104" />
+		<property name="name" value="John" />
+		<property name="salary" value="10000" />
+		<property name="permanent" value="true" />
+		
+		<property name="department" ref="payroll" />
+
+		<property name="skills">
+			<list>
+				<ref bean="s1" />
+				<ref bean="s3" />
+			</list>
+		</property>
+
+		<property name="dateOfBirth" value="08/03/2012" />
+	</bean>
+
+	<!-- Employee List -->
+	<bean id="employeeList" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<ref bean="101"></ref>
+				<ref bean="102"></ref>
+				<ref bean="103"></ref>
+				<ref bean="104"></ref>
+			</list>
+		</constructor-arg>
+	</bean>
+
+</beans>
