@@ -1,0 +1,1 @@
+create table movielist(id long,title varchar(120), boxoffice varchar(120),active boolean, dateoflaunch date,genre varchar(120), hasteaser boolean);

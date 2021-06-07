@@ -1,0 +1,82 @@
+version: '3.7'
+services:
+  mysql-docker-container:
+    image: mysql
+    container_name : mysql-docker-container
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=root123
+      - MYSQL_DATABASE=docker_db
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=itsPabitra@96
+    ports:
+      - 3307:3306
+    networks:
+      - truyum-network
+    volumes:
+      - ./mydata:/var/lib/mysql
+      - ./dbscript:/docker-entrypoint-inintdb.d/
+
+  eureka-discovery-service:
+    image: eureka
+    build:
+      context: eureka
+      dockerfile: Dockerfile
+    ports:
+      - "8761:8761"
+    restart: always
+    networks:
+      - truyum-network
+      
+  zuul-gateway-service:
+    image: zuul-gateway-service
+    build:
+      context: zuul-gateway-service
+      dockerfile: Dockerfile
+    ports:
+      - "8089:8089"
+    restart: always
+    depends_on:
+      - eureka-discovery-service
+    networks:
+      - truyum-network
+   
+  movie-service:
+    image: movie-service
+    build:
+      context: movie-service
+      dockerfile: Dockerfile
+    ports:
+      - "8083:8083"
+    restart: always
+    networks:
+      - truyum-network
+    depends_on:
+      - mysql-docker-container
+      - eureka-discovery-service
+      - zuul-gateway-service
+    links:
+      - mysql-docker-container:mysql-docker-container
+ 
+  authentication-service:
+    image: auth-service
+    build:
+      context: auth-service
+      dockerfile: Dockerfile
+    ports:
+      - "8084:8084"
+    restart: always
+    networks:
+      - truyum-network
+    depends_on:
+      - mysql-docker-container
+      - eureka-discovery-service
+      - zuul-gateway-service
+    links:
+      - mysql-docker-container:mysql-docker-container
+  
+  
+# Networks to be created to facilitate communication between containers
+networks:
+  truyum-network:
